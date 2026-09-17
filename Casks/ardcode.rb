@@ -1,7 +1,7 @@
 cask "ardcode" do
   version "0.8.56"
   sha256 arm:          "d2c8c7d9d63e41fecb0b96d99951e6e72dacc9192ce0b715f8afcf80a6651f83"
-  url "https://github.com/ardvis/ardcode-dist/releases/download/v#{version}/ardcode-macos-arm64.tar.gz"
+  url "https://github.com/ardvis/homebrew-tap/releases/download/ardcode-v#{version}/ardcode-macos-arm64.tar.gz"
 
   depends_on macos: :tahoe
   depends_on arch: :arm64
@@ -22,7 +22,7 @@ cask "ardcode" do
 
   name "Ardcode"
   desc "Native code editor with indexed exploration and MCP integration"
-  homepage "https://github.com/ardvis/ardcode-dist"
+  homepage "https://github.com/ardvis/homebrew-tap"
 
   binary "Ardcode.app/Contents/Helpers/ardcode.app/Contents/MacOS/ardcode"
 end
