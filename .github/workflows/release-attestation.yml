@@ -1,0 +1,33 @@
+name: Ardcode release attestation
+
+# Ardcode's signed archives are attested here, where they are published. The
+# tap hosts every product's releases, so only Ardcode's tag prefix is attested;
+# its release flow waits for this run and verifies the result before it
+# finishes. Moved from ardcode-dist when Ardcode's assets moved to the tap.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  attest:
+    if: startsWith(github.event.release.tag_name, 'ardcode-v')
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download release archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p release-assets
+          gh release download "${{ github.event.release.tag_name }}" \
+            --repo "${{ github.repository }}" \
+            --dir release-assets \
+            --pattern '*.tar.gz'
+      - name: Attest release archives
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: "release-assets/*.tar.gz"
