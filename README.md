@@ -32,8 +32,8 @@ All casks support Apple silicon Macs running macOS 26 (Tahoe).
 ## Migrate from the per-product taps
 
 Earlier instructions installed from `ardvis/ardcode-dist`, `ardvis/ardterm-dist`,
-or `ardvis/ardnode-dist`. Those repositories now host release assets only; their
-casks moved here.
+or `ardvis/ardnode-dist`. Their casks moved here, and Ardnode's and Ardterm's
+assets followed; Ardcode's assets stay in `ardvis/ardcode-dist`.
 
 ```sh
 brew tap                        # list the Ardvis taps you have installed
@@ -48,9 +48,22 @@ reinstalls an already-installed cask from the new tap at the published version.
 Trust entries recorded for the old taps can stay: no cask is loaded from them
 again.
 
+## Release assets
+
+Releases in this repository hold the signed, notarized app archives the casks
+download, so one repository holds everything a Homebrew install reads. Tags carry
+the product name because this repository hosts all three: `ardcode-v0.8.56`,
+`ardterm-v0.1.21`, `ardnode-v0.1.1`. Each release contains the archive, its
+`SHA256SUMS`, the resolved `Package.resolved`, and `release.json`.
+
+Releases published before the move live in the per-product `-dist` repositories,
+and the casks for those versions still download from there. Ardcode's assets
+remain in `ardcode-dist`, which hosts the build-provenance workflow that attests
+its archives.
+
 ## Release metadata
 
-Each product's release script writes its cask here and pushes it after the
-signed, notarized release assets are published. Casks, versions, and checksums
-are generated from the product release templates; do not hand-edit them.
-Release assets stay in the per-product `-dist` repositories.
+Each product's release script writes its cask and its release assets here and
+pushes the cask after the signed, notarized assets are published. Casks,
+versions, and checksums are generated from the product release templates; do not
+hand-edit them.
