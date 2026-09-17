@@ -35,7 +35,7 @@ cask "ardnode" do
   end
 
   # `launchctl:` unloads the agent and removes its plist; the artifact stanza
-  # removes the installed helper. A `delete:` list would remove both paths with
-  # sudo, which prompts for a password for files the user owns.
+  # removes the installed helper. Listing the paths for removal would remove
+  # them with sudo, which prompts for a password for files the user owns.
   uninstall launchctl: "com.ardvis.ardnode.helper"
 end
