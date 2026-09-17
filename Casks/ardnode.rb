@@ -16,7 +16,7 @@ cask "ardnode" do
     # The app registers its own login item through SMAppService, so the system
     # lists it as "Ardnode" instead of the Developer ID team. A sandboxed
     # process cannot reach the service that records login items, so the step
-    # runs in the unsandboxed parent Homebrew reserves for .
+    # runs in the unsandboxed parent Homebrew reserves for sudo: "if_needed".
     run "Library/Application Support/Ardvis/Helpers/Ardnode.app/Contents/MacOS/ardnode",
         base: :home,
         args: ["--register-agent"],
