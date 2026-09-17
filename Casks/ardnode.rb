@@ -1,11 +1,11 @@
 cask "ardnode" do
-  version "0.1.1"
-  sha256 "3af0b1764985936c6a1e86a6d2e6b126521e32aa800342425ef5b40333ee6f2e"
+  version "0.2.0"
+  sha256 "c73f13f4c2c5ee42b9f7e8333d2b997b7082c6b19ab22367a51f529aa48bb998"
 
-  url "https://github.com/ardvis/ardnode-dist/releases/download/v#{version}/Ardnode-macos-arm64.zip"
+  url "https://github.com/ardvis/homebrew-tap/releases/download/ardnode-v#{version}/Ardnode-macos-arm64.zip"
   name "Ardnode"
   desc "Ardvis mesh host helper and Screen Sharing proxy"
-  homepage "https://github.com/ardvis/ardnode-dist"
+  homepage "https://github.com/ardvis/homebrew-tap"
 
   depends_on arch: :arm64
   depends_on macos: :tahoe
