@@ -6,16 +6,20 @@ host helper.
 ## Install
 
 ```sh
+brew trust --tap ardvis/tap
 brew tap ardvis/tap
 brew install --cask ardcode     # or ardterm, or ardnode
 ```
 
-`brew install --cask ardvis/tap/ardcode` also works, because Homebrew taps a
-repository automatically for an explicit cask reference. Tap first when a
-dependency is involved: Ardterm and Ardcode declare `depends_on cask: "ardnode"`,
-and Homebrew resolves a cask dependency only against an already installed tap.
-With the casks in one tap, the Ardnode dependency resolves during the same
-install.
+Trust the tap first. Homebrew refuses to load a cask from an untrusted tap, and
+it loads a cask dependency by bare name even when you install with an explicit
+`ardvis/tap/ardcode` reference. Ardterm and Ardcode declare
+`depends_on cask: "ardnode"`, so without `brew trust --tap ardvis/tap` the
+install fails while loading the Ardnode dependency.
+
+Tapping before installing keeps the Ardnode dependency resolvable in the same
+command. One tap holds all three casks for that reason: Homebrew resolves a cask
+dependency only against an installed tap.
 
 | Cask | Contents |
 | --- | --- |
@@ -32,14 +36,17 @@ or `ardvis/ardnode-dist`. Those repositories now host release assets only; their
 casks moved here.
 
 ```sh
-brew tap                       # list the Ardvis taps you have installed
-brew untap ardvis/ardcode-dist # repeat for ardvis/ardterm-dist, ardvis/ardnode-dist
+brew tap                        # list the Ardvis taps you have installed
+brew untap ardvis/ardcode-dist  # repeat for ardvis/ardterm-dist, ardvis/ardnode-dist
+brew trust --tap ardvis/tap
 brew tap ardvis/tap
-brew upgrade --cask ardcode    # or ardterm; reinstalls from this tap
+brew upgrade --cask ardcode     # or ardterm; reinstalls from this tap
 ```
 
 Untapping does not uninstall an app or delete its data, and `brew upgrade`
 reinstalls an already-installed cask from the new tap at the published version.
+Trust entries recorded for the old taps can stay: no cask is loaded from them
+again.
 
 ## Release metadata
 
