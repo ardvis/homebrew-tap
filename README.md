@@ -32,8 +32,8 @@ All casks support Apple silicon Macs running macOS 26 (Tahoe).
 ## Migrate from the per-product taps
 
 Earlier instructions installed from `ardvis/ardcode-dist`, `ardvis/ardterm-dist`,
-or `ardvis/ardnode-dist`. Their casks moved here, and Ardnode's and Ardterm's
-assets followed; Ardcode's assets stay in `ardvis/ardcode-dist`.
+or `ardvis/ardnode-dist`. Their casks moved here, and every product's assets
+followed.
 
 ```sh
 brew tap                        # list the Ardvis taps you have installed
@@ -53,13 +53,16 @@ again.
 Releases in this repository hold the signed, notarized app archives the casks
 download, so one repository holds everything a Homebrew install reads. Tags carry
 the product name because this repository hosts all three: `ardcode-v0.8.56`,
-`ardterm-v0.1.21`, `ardnode-v0.1.1`. Each release contains the archive, its
-`SHA256SUMS`, the resolved `Package.resolved`, and `release.json`.
+`ardterm-v0.1.21`, `ardnode-v0.1.1`. Ardterm and Ardnode releases contain the
+archive, its `SHA256SUMS`, the resolved `Package.resolved`, and `release.json`;
+Ardcode releases contain `ardcode-macos-arm64.tar.gz`, its `.sha256`, and an
+SPDX SBOM. The `.github/workflows/release-attestation.yml` workflow here attests
+Ardcode's archives on the release event, and Ardcode's release waits for and
+verifies that attestation before it finishes.
 
 Releases published before the move live in the per-product `-dist` repositories,
-and the casks for those versions still download from there. Ardcode's assets
-remain in `ardcode-dist`, which hosts the build-provenance workflow that attests
-its archives.
+and the casks for those versions still download from there. `ardcode-dist` keeps
+those archives and is no longer in any release path.
 
 ## Release metadata
 
