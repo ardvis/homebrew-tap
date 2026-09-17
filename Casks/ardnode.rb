@@ -1,6 +1,6 @@
 cask "ardnode" do
-  version "0.1.0"
-  sha256 "b24a4a5b99d2bfefb84ca74cd481293b92140b03e9d0a4e7e58a2843f6779722"
+  version "0.1.1"
+  sha256 "3af0b1764985936c6a1e86a6d2e6b126521e32aa800342425ef5b40333ee6f2e"
 
   url "https://github.com/ardvis/ardnode-dist/releases/download/v#{version}/Ardnode-macos-arm64.zip"
   name "Ardnode"
@@ -13,29 +13,24 @@ cask "ardnode" do
   artifact "Ardnode.app", target: "#{Dir.home}/Library/Application Support/Ardvis/Helpers/Ardnode.app"
 
   postflight_steps do
-    # Homebrew runs install steps inside a sandbox, and sandbox-exec blocks
-    # launchctl from reaching launchd. A step marked `sudo: "if_needed"` is
-    # brokered to the unsandboxed parent process, which still runs it without
-    # privilege escalation, so the helper can be bootstrapped there.
-    mkdir_p "#{Dir.home}/Library/LaunchAgents"
-    mkdir_p "#{Dir.home}/Library/Logs/Ardvis"
-    copy "Ardnode.app/Contents/Resources/com.ardvis.ardnode.helper.plist",
-         "#{Dir.home}/Library/LaunchAgents/com.ardvis.ardnode.helper.plist"
-    inreplace "#{Dir.home}/Library/LaunchAgents/com.ardvis.ardnode.helper.plist",
-              "__HELPER_PATH__",
-              "#{Dir.home}/Library/Application Support/Ardvis/Helpers/Ardnode.app/Contents/MacOS/ardnode"
-    inreplace "#{Dir.home}/Library/LaunchAgents/com.ardvis.ardnode.helper.plist",
-              "__LOG_DIR__", "#{Dir.home}/Library/Logs/Ardvis"
-    run "/bin/launchctl",
-        args: [
-          "bootstrap", "gui/#{Process.uid}",
-          "#{Dir.home}/Library/LaunchAgents/com.ardvis.ardnode.helper.plist"
-        ],
+    # The app registers its own login item through SMAppService, so the system
+    # lists it as "Ardnode" instead of the Developer ID team. A sandboxed
+    # process cannot reach the service that records login items, so the step
+    # runs in the unsandboxed parent Homebrew reserves for .
+    run "Library/Application Support/Ardvis/Helpers/Ardnode.app/Contents/MacOS/ardnode",
+        base: :home,
+        args: ["--register-agent"],
         sudo: "if_needed"
   end
 
-  # `launchctl:` unloads the agent and removes its plist; the artifact stanza
-  # removes the installed helper. Listing the paths for removal would remove
-  # them with sudo, which prompts for a password for files the user owns.
-  uninstall launchctl: "com.ardvis.ardnode.helper"
+  uninstall_preflight_steps do
+    # Runs before the artifact stanza removes the app, because the bundle
+    # unregisters its own login item. An app the user already deleted must not
+    # stop the uninstall.
+    run "Library/Application Support/Ardvis/Helpers/Ardnode.app/Contents/MacOS/ardnode",
+        base:         :home,
+        args:         ["--unregister-agent"],
+        sudo:         "if_needed",
+        must_succeed: false
+  end
 end
