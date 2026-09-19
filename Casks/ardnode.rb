@@ -1,6 +1,6 @@
 cask "ardnode" do
-  version "0.3.7"
-  sha256 "8ac5f895d6674da834d384c47716f456561145f409e2a6fc04fc15fa83399827"
+  version "0.3.8"
+  sha256 "d76bf3e50687644e43e091f4fcd4a0a6e81b6753bb82f8a88b1e5ce0a27ab7c4"
 
   url "https://github.com/ardvis/homebrew-tap/releases/download/ardnode-v#{version}/Ardnode-macos-arm64.zip"
   name "Ardnode"
