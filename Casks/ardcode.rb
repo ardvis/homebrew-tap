@@ -1,6 +1,6 @@
 cask "ardcode" do
-  version "0.8.82"
-  sha256 arm:          "e994c0b3605b328bbc4fe2b894ba9ca9202f0cb3b0d98985a92c3bbe914b0d8d"
+  version "0.8.83"
+  sha256 arm:          "f2058ab25e5a429b7ba7b4f5c30508fb13fc1c41d3e5cb50d1c4e4ce9b1dd5e9"
   url "https://github.com/ardvis/homebrew-tap/releases/download/ardcode-v#{version}/ardcode-macos-arm64.tar.gz"
 
   depends_on macos: :tahoe
