@@ -18,15 +18,27 @@ jobs:
     if: startsWith(github.event.release.tag_name, 'ardcode-v')
     runs-on: ubuntu-24.04
     steps:
+      # Just after publication, GitHub's tag view of a release, which
+      # `gh release download` reads, can list no assets for over half an hour.
+      # The release's own asset list is current, so download by ID.
       - name: Download release archives
         env:
           GH_TOKEN: ${{ github.token }}
+          RELEASE_ID: ${{ github.event.release.id }}
+          REPOSITORY: ${{ github.repository }}
         run: |
           mkdir -p release-assets
-          gh release download "${{ github.event.release.tag_name }}" \
-            --repo "${{ github.repository }}" \
-            --dir release-assets \
-            --pattern '*.tar.gz'
+          gh api "repos/$REPOSITORY/releases/$RELEASE_ID/assets" --paginate \
+            --jq '.[] | select(.name | endswith(".tar.gz")) | [.id, .name] | @tsv' \
+            > archives.tsv
+          if [ ! -s archives.tsv ]; then
+            echo "Release $RELEASE_ID has no .tar.gz asset to attest." >&2
+            exit 1
+          fi
+          while IFS="$(printf '\t')" read -r id name; do
+            gh api -H 'Accept: application/octet-stream' \
+              "repos/$REPOSITORY/releases/assets/$id" > "release-assets/$name"
+          done < archives.tsv
       - name: Attest release archives
         uses: actions/attest-build-provenance@v2
         with:
