@@ -1,9 +1,9 @@
 cask "ardcode" do
-  version "0.8.103"
-  sha256 arm:          "a29af7dfa9810817cfebc1c6cb7cfd5c4b65e9243c0b53ef1cb6dd8368da23d5"
+  version "0.8.104"
+  sha256 arm:          "25a029e0ca8d3661195326ffdfb852f3d8661be6bbc9dc6e1fe99a8a51c8fb36"
   url "https://github.com/ardvis/homebrew-tap/releases/download/ardcode-v#{version}/ardcode-macos-arm64.tar.gz"
 
-  depends_on macos: :tahoe
+  depends_on macos: :golden_gate
   depends_on arch: :arm64
   depends_on cask: "font-fira-code"
   depends_on cask: "ardnode"
