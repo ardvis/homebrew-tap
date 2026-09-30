@@ -1,6 +1,6 @@
 cask "ardnode" do
-  version "0.3.35"
-  sha256 "eef6000897ea417a8c17537b420482e98ea674b521f135c9d85d4048213a941b"
+  version "0.3.36"
+  sha256 "9622efb088a45a1f67ad1aa1d721f27a85dd5155bd7844cc31c8a640e821fdaa"
 
   url "https://github.com/ardvis/homebrew-tap/releases/download/ardnode-v#{version}/Ardnode-macos-arm64.zip"
   name "Ardnode"
@@ -8,7 +8,7 @@ cask "ardnode" do
   homepage "https://github.com/ardvis/homebrew-tap"
 
   depends_on arch: :arm64
-  depends_on macos: :tahoe
+  depends_on macos: :golden_gate
 
   artifact "Ardnode.app", target: "#{Dir.home}/Library/Application Support/Ardvis/Helpers/Ardnode.app"
 
