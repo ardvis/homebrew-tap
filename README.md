@@ -27,7 +27,7 @@ dependency only against an installed tap.
 | `ardterm` | Ardterm terminal app |
 | `ardnode` | Ardnode mesh host helper and Screen Sharing proxy |
 
-All casks support Apple silicon Macs running macOS 26 (Tahoe).
+All casks require an Apple silicon Mac running macOS 27 or later.
 
 ## Migrate from the per-product taps
 
