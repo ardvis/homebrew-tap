@@ -1,6 +1,6 @@
 cask "ardterm" do
-  version "0.1.75"
-  sha256 "7929ad7c57b9ea5336dc418ac408a5c748cf73e4961ac904fa4f96efa9c2fe65"
+  version "0.1.76"
+  sha256 "ed595a919c0779d26704a74e835cfe0569348c1c4fa4fbfbea3dd958d0e89e29"
   url "https://github.com/ardvis/homebrew-tap/releases/download/ardterm-v#{version}/Ardterm-macos-arm64.zip"
   name "Ardterm"
   desc "Native macOS terminal with authenticated remote sessions"
