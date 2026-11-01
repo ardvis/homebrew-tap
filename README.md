@@ -6,7 +6,6 @@ macOS 27 or later.
 | Cask | Contents |
 | --- | --- |
 | `ardcode` | Ardcode app and the code exploration CLI |
-| `ardterm` | Ardterm terminal app |
 | `ardnode` | Ardnode mesh host helper and Screen Sharing proxy |
 
 ## Install
@@ -14,27 +13,26 @@ macOS 27 or later.
 ```sh
 brew trust --tap ardvis/tap
 brew tap ardvis/tap
-brew install --cask ardcode     # or ardterm, or ardnode
+brew install --cask ardcode     # or ardnode
 ```
 
 Trust the tap first. Homebrew refuses casks from an untrusted tap, and it loads
 a cask dependency by bare name even for an explicit `ardvis/tap/ardcode`.
-Ardcode and Ardterm declare `depends_on cask: "ardnode"`, so without the trust
+Ardcode declares `depends_on cask: "ardnode"`, so without the trust
 step the install fails on the Ardnode dependency. Homebrew resolves a cask
-dependency only against an installed tap, which is why one tap holds all three
-casks and why you tap before installing.
+dependency only against an installed tap, which is why one tap holds every cask
+and why you tap before installing.
 
 ## Moving from the per-product taps
 
-Casks once came from `ardvis/ardcode-dist`, `ardvis/ardterm-dist` and
-`ardvis/ardnode-dist`. To switch:
+Casks once came from `ardvis/ardcode-dist` and `ardvis/ardnode-dist`. To switch:
 
 ```sh
 brew tap                        # list the Ardvis taps you have
-brew untap ardvis/ardcode-dist  # and ardvis/ardterm-dist, ardvis/ardnode-dist
+brew untap ardvis/ardcode-dist  # and ardvis/ardnode-dist
 brew trust --tap ardvis/tap
 brew tap ardvis/tap
-brew upgrade --cask ardcode     # or ardterm; reinstalls from this tap
+brew upgrade --cask ardcode     # reinstalls from this tap
 ```
 
 Untapping keeps the app and its data, and `brew upgrade` reinstalls the cask
