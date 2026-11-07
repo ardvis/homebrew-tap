@@ -1,9 +1,8 @@
-name: Ardcode release attestation
+name: Cleave release attestation
 
-# Ardcode's signed archives are attested here, where they are published. The
-# tap hosts every product's releases, so only Ardcode's tag prefix is attested;
-# its release flow waits for this run and verifies the result before it
-# finishes. Moved from ardcode-dist when Ardcode's assets moved to the tap.
+# Cleave's signed archives are attested here, where they are published. Only
+# Cleave's tag prefix is attested; its release flow waits for this run and
+# verifies the result before it finishes.
 on:
   release:
     types: [published]
@@ -15,7 +14,7 @@ permissions:
 
 jobs:
   attest:
-    if: startsWith(github.event.release.tag_name, 'ardcode-v')
+    if: startsWith(github.event.release.tag_name, 'cleave-v')
     runs-on: ubuntu-24.04
     steps:
       # Just after publication, GitHub's tag view of a release, which
