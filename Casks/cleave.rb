@@ -1,6 +1,6 @@
 cask "cleave" do
-  version "0.8.208"
-  sha256 arm:          "0000000000000000000000000000000000000000000000000000000000000000"
+  version "0.8.209"
+  sha256 arm:          "7bd7f2a14bfc67b1dfcfc28549dbb220e52b4a5bdc4525c820d6a20f30d147c3"
   url "https://github.com/ardvis/homebrew-tap/releases/download/cleave-v#{version}/cleave-macos-arm64.tar.gz"
 
   depends_on macos: :golden_gate
