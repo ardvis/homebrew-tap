@@ -1,6 +1,6 @@
 cask "cleaves" do
-  version "0.8.216"
-  sha256 arm:          "aed2ee2e46d70d140a2d4f0fae33ab2bf32c5a1bfc0787617c2da70b0e521b96"
+  version "0.8.217"
+  sha256 arm:          "9c96f5cf85a4f6562403305f7039052a9c335a68bc171341d67c2cd52cd67a82"
   url "https://github.com/ardvis/homebrew-tap/releases/download/cleaves-v#{version}/cleaves-macos-arm64.tar.gz"
 
   depends_on macos: :golden_gate
