@@ -21,8 +21,7 @@ Trust the tap first: Homebrew refuses casks from an untrusted tap.
 
 This repository's releases hold the signed, notarized archives the cask
 downloads, under `cleaves-v<version>` tags: `cleaves-macos-arm64.tar.gz`, its
-`.sha256`, and an SPDX SBOM. Older `cleave-v`, `ardcode-v`, `ardterm-v` and
-`ardnode-v` releases belong to retired names and apps.
+`.sha256`, and an SPDX SBOM.
 
 `.github/workflows/release-attestation.yml` attests Cleaves's archives on the
 release event, and Cleaves's release waits for and verifies that attestation.
