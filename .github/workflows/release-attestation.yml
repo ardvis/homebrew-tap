@@ -1,7 +1,7 @@
-name: Cleaves release attestation
+name: Cleven release attestation
 
-# Cleaves's signed archives are attested here, where they are published. Only
-# Cleaves's tag prefix is attested; its release flow waits for this run and
+# Cleven's signed archives are attested here, where they are published. Only
+# Cleven's tag prefix is attested; its release flow waits for this run and
 # verifies the result before it finishes.
 on:
   release:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   attest:
-    if: startsWith(github.event.release.tag_name, 'cleaves-v')
+    if: startsWith(github.event.release.tag_name, 'cleven-v')
     runs-on: ubuntu-24.04
     steps:
       # Just after publication, GitHub's tag view of a release, which
