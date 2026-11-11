@@ -1,8 +1,8 @@
-name: Cleven release attestation
+name: Release attestation
 
-# Cleven's signed archives are attested here, where they are published. Only
-# Cleven's tag prefix is attested; its release flow waits for this run and
-# verifies the result before it finishes.
+# Each product's signed archives are attested here, where they are published:
+# Cleven's under cleven-v tags and Troke's under troke-v tags. Each release
+# waits for this run and verifies the result before it publishes its cask.
 on:
   release:
     types: [published]
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   attest:
-    if: startsWith(github.event.release.tag_name, 'cleven-v')
+    if: startsWith(github.event.release.tag_name, 'cleven-v') || startsWith(github.event.release.tag_name, 'troke-v')
     runs-on: ubuntu-24.04
     steps:
       # Just after publication, GitHub's tag view of a release, which
