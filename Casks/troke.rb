@@ -1,6 +1,6 @@
 cask "troke" do
-  version "0.1.1"
-  sha256 "e4fd16b132990e06e27419c7dfcd453ee65a8543cfe22f9b572ee0347f853a27"
+  version "0.1.2"
+  sha256 "5a818ea61d562f67e48edf1c993565a493a0e5e03c288676c965c23866227b62"
 
   url "https://github.com/ardvis/homebrew-tap/releases/download/troke-v#{version}/troke-macos-arm64.tar.gz"
   name "Troke"
