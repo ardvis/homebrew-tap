@@ -6,20 +6,16 @@ macOS 27 or later.
 | Cask | Contents |
 | --- | --- |
 | `cleven` | Cleven, its command-line helper, and Cleven Node, the mesh host and Screen Sharing proxy it registers as a login item |
-| `troke` | Troke, automated trading on Stockbit that the Troke iPhone app manages |
 
 ## Install
 
 ```sh
 brew trust --tap ardvis/tap
 brew tap ardvis/tap
-brew install --cask cleven   # or troke
+brew install --cask cleven
 ```
 
 Trust the tap first: Homebrew refuses casks from an untrusted tap.
-
-Upgrading or uninstalling Troke quits it first, which stops trading until
-Troke is opened again.
 
 ## Release assets
 
@@ -28,7 +24,6 @@ download:
 
 - `cleven-v<version>`: `cleven-macos-arm64.tar.gz`, its `.sha256`, and an
   SPDX SBOM.
-- `troke-v<version>`: `troke-macos-arm64.tar.gz` and its `.sha256`.
 
 `.github/workflows/release-attestation.yml` attests each archive on the
 release event, and each product's release waits for and verifies that
