@@ -1,6 +1,6 @@
 cask "cleven" do
-  version "0.8.242"
-  sha256 arm:          "fb4b89f0cc63a0838d8ab342ee82f18e064c5ec91f89d0d62738c5ea0c8793f4"
+  version "0.8.243"
+  sha256 arm:          "61c8b469051c4b14604f908ec0b404b572a002434b94997e23a5287fbf819318"
   url "https://github.com/ardvis/homebrew-tap/releases/download/cleven-v#{version}/cleven-macos-arm64.tar.gz"
 
   depends_on macos: :golden_gate
