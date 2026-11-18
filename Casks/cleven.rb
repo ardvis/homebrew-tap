@@ -1,6 +1,6 @@
 cask "cleven" do
-  version "0.8.249"
-  sha256 arm:          "13e6e16e213f65f3ed8723f7d6d8cc74d89c1f1e02797c82a4908bab6cd0846a"
+  version "0.8.250"
+  sha256 arm:          "b0d28d7c88a8516a4b7fd17b783c4f5b862872138148730d79aa42fbf88366ff"
   url "https://github.com/ardvis/homebrew-tap/releases/download/cleven-v#{version}/cleven-macos-arm64.tar.gz"
 
   depends_on macos: :golden_gate
@@ -12,11 +12,16 @@ cask "cleven" do
   postflight_steps do
     # Run the self-contained, signed CLI helper directly. Homebrew postflight
     # is sandboxed and has no interactive AppKit session; launching the SwiftUI
-    # app would abort while NSApplication initializes.
+    # app would abort while NSApplication initializes. Setup puts Cleven's MCP
+    # entry and skill in each client, replacing another of the name. An entry
+    # or skill it can't set up, such as one whose folder is a link, keeps what
+    # it had and is named in the output; it doesn't undo the install, and
+    # `cleven doctor` reports it.
     run "{{staged_path}}/Cleven.app/Contents/Helpers/cleven.app/Contents/MacOS/cleven",
-        args:           ["setup", "--managed-only"],
+        args:           ["setup", "--force"],
         writable_paths: [".agents", ".claude", ".claude.json", ".codex", ".gemini"],
-        writable_base:  :home
+        writable_base:  :home,
+        must_succeed:   false
     # Cleven Node registers its own login item through SMAppService, from the
     # installed app, so Login Items lists it as Cleven Node. A sandboxed
     # process can't reach the service that records login items, so the step
